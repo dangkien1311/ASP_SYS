@@ -9,7 +9,7 @@ class Port(object):
 
 import openpyxl
 def getPort (url, numPort):
-    url = 'SYS_ASP\Data\Port.xlsx'
+    url = '/home/code/SYS_ASP/Data/Port.xlsx'
     res = [];
 
     wb = openpyxl.load_workbook(url);

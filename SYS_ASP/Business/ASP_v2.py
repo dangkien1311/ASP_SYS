@@ -5,7 +5,10 @@ import Port
 import Stack
 import Slot
 import Container
+import logging
 
+cplex_ins_path = '/opt/ibm/ILOG/CPLEX_Studio2211'
+logging.basicConfig(filename='terminal_output.log', level=logging.INFO, filemode='w')
 
 asp_model = Model('ASP')
 #Data
@@ -34,7 +37,6 @@ Hc = {i[0]:i[3] for i in listCont}
 Rc = {i[0]:i[5] for i in listCont}
 T = [i[0] for i in listCont if i[1] == '20']
 F = [i[0] for i in listCont if i[1] == '40']
-
 
 A ={(i[0], d): Container.loadingPort(i[4],d) for i in listCont for d in D}
 
@@ -136,28 +138,28 @@ asp_model.minimize(100*sum(o[i] for i in I)
                    + 20*sum(p[j,D[d]] for j in J for d in range(len(D)) if d>0)
                    + 10*sum(ej[j] for j in J))
 #Run
-asp_model.parameters.timelimit=60
+# asp_model.parameters.timelimit=60
 asp = asp_model.solve(log_output=True)
 #asp.display()
-print("<===========INFORMATION==================>")
-asp_model.print_information()
+logging.info("<===========INFORMATION==================>")
+logging.info(asp_model.print_information())
 # f.write(str(asp_model.print_information()))
-print("<===========SOLUTION==================>")
-asp_model.print_solution()
+logging.info("<===========SOLUTION==================>")
+logging.info(asp_model.print_solution())
 # f.write(str(asp_model.print_solution()))
-print("<===========DISPLAY==================>")
+logging.info("<===========DISPLAY==================>")
 #Fail
 if asp is None:
-    print("Infeasible")
+    logging.info("Infeasible")
 else:
-    asp.display()
+    logging.info(asp.display())
     # f.write(str(asp.display()))
-    print("<===========RES==================>")
+    logging.info("<===========RES==================>")
     #A_activos=[i for i in C if c[i].solution_value>0.9]
     #print(A)
-    print("<===========C==================>")
+    logging.info("<===========C==================>")
     B_activos=[i for i in C if c[i].solution_value]
-    print(B_activos)
+    logging.info(B_activos)
     # f = open("../Data/res.txt","a")
     # f.write(B_activos)
     # f.close()

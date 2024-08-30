@@ -16,21 +16,21 @@ class Stack:
 
 import openpyxl
 def getStack (url, numStack):
-    url = 'SYS_ASP\Data\Stack.xlsx'
-    res = [];
+    url = '/home/code/SYS_ASP/Data/Stack.xlsx'
+    res = []
 
-    wb = openpyxl.load_workbook(url);
-    sheet = wb['Stack'];
-    maxRow = sheet.max_row;
+    wb = openpyxl.load_workbook(url)
+    sheet = wb['Stack']
+    maxRow = sheet.max_row
     #if numStack > maxRow:
-    #    return res;
+    #    return res
     #get data stack
     for i in range(2, maxRow + 1 ):
-        cellId = sheet['D' + str(i)];
-        cellW = sheet['H' + str(i)];
-        cellH = sheet['I' + str(i)];
-        cellU = sheet['K' + str(i)];
-        res.append([cellId.value, cellW.value, cellH.value, cellU.value]);
-    return res;
+        cellId = sheet['D' + str(i)]
+        cellW = sheet['H' + str(i)]
+        cellH = sheet['I' + str(i)]
+        cellU = sheet['K' + str(i)]
+        res.append([cellId.value, cellW.value, cellH.value, cellU.value])
+    return res
 
 

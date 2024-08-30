@@ -11,7 +11,7 @@ class Slot:
 
 import openpyxl
 def getSlot (url, numSlot):
-    url = 'SYS_ASP\Data\Slot.xlsx'
+    url = '/home/code/SYS_ASP/Data/Slot.xlsx'
     res = [];
 
     wb = openpyxl.load_workbook(url);
